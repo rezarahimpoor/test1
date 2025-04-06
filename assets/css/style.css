@@ -1,0 +1,11 @@
+
+#top-action-section{
+    display: flex !important;
+    display: center !important;
+}
+.user-list-item.user-list-arrow-icon{
+    transition: all 200ms;
+}
+.user-list-item.activ.user-list-arrow-icon{
+    transform: rotate(180deg);
+}
