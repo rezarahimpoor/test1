@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
+  
     <!-- nav bar section --------------start---------------->
     <nav class="white z-depth-0">
         <div class="nav-wrapper">
@@ -49,7 +50,7 @@
        <section class="row" id="top-actions-section">
         <!-----------add btn---------------->
         <div class="p-l-10 p-r-10 p-t-10 col s12 m3 l2">
-            <button class="waves-effect waves-light btn blue darken-3 p-l-30 p-r-30 w-full rounded-pill flex-c-m">
+            <button id="add_user_button" class="waves-effect waves-light btn blue darken-3 p-l-30 p-r-30 w-full rounded-pill flex-c-m">
              <i class="material-icons m-r-5">add</i>Add User
             </button>    
         </div>    
@@ -68,24 +69,85 @@
        </section>
        <!-- --------start   center     section------->
         <section class="user-list-section">
-          <ul class="collapsible">
-            <li class="user-list-item">
-              <div class="collapsible-header"></div>
-              <i class="material-icons user-list-arrow-icon">arrow_drop_down</i>rezarahimpoor
-              <div class="collapsible-body">
-                <div class="p-all-5">
-                  <span class="f-bold">Username :</span>
-                  <span class="f-bold">rezarahimpoor</span>
-                </div>
-                <div class="p-all-5">
-                  <span class="f-bold">pass :</span>
-                  <span class="f-bold">Le476298</span>
-                </div>
-              </div>
+          <ul class="collapsible hide-on-med-and-up">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">arrow_drop_down</i>reza rahimpoor</div>
+              <div class="collapsible-body red"><span>Username: rezarahimpoor </span></div>
+              <div class="collapsible-body blue"><span>pass : Le476298 </span></div>
+              <div class="collapsible-body red"><span>email : reza137872@gmail.com </span></div>
+              <div class="collapsible-body blue"><span> <i class="material-icons">create</i><i class="material-icons">delete_forever</i> </span></div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">arrow_drop_down</i>Second</div>
+              <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">arrow_drop_down</i>Third</div>
+              <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
             </li>
           </ul>
+        <!-- for   cp   size    start-->
+         <div class="hide-on-med-and-down show-on-medium-and-up container">
+          <table class="striped highlight centered">
+            <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Username :</th>
+                  <th>Emaile :</th>
+                  <th>actions :</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>reza</td>
+                <td>rezarahimpoor</td>
+                <td>reza137872@gmail.com</td>
+                <td><i class="material-icons">create</i><i class="material-icons">delete_forever</i></td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Alan</td>
+                <td>Jellybean</td>
+                <td>gggijgfdfghjk</td>
+                <td><i class="material-icons">create</i><i class="material-icons">delete_forever</i></td>
+              </tr>
+            </tbody>
+          </table>
+         </div>
+         <!-- for    cp    size   end -->
         </section>
        <!-- --------end   center     section------->
+      <!--          start        douwn    section  -->
+                <div class="container pagination_container p-r-9 p-t-15 p-l-9 p-b-10 flecx-sb-m pos-fixed left-0 right-0 bottom-0 z-depth-4">
+                  <div class="pagination_item_counts flex-l p-l-10 flex-l-m">
+                    showing
+                    <span class="m-r-5 m-l-5 max-w-50">
+                      <input type="number" value="10" class="blue-text darken-3 no-bored m-b-0 center-align"></span>
+                      of
+                      <span class="blue-text darken-3 m-l-5 m-r-5">100</span>
+                    </div>
+                    <div class="pgination_buttons">
+                      <i class="material-icons blue darken-3 waves-effect waves-light white-text rounded-pill m-l-5 m-r-5 p-b-3 p-t-1 p-r-5 p-l-5">keyboard_arrow_right</i>
+                      <i class="material-icons blue darken-3 waves-effect waves-light white-text rounded-pill m-l-5 m-r-5 p-b-3 p-t-1 p-r-5 p-l-5">keyboard_arrow_left</i>
+                    </div>
+                  </div>
+      <!--          end        douwn    section  -->
+            <!-- add    user     start -->
+                <div class="add_user_modal_back dis-none"></div>
+                <div class="add_user_modal container rounded_top_30 trans-0-4">
+                  <div class="row center-on-small-only p-b-10 p-t-10 p-l-40 p-r-40">
+                    <h5><i class="material-icons m-r-10 m-l-10 top-4 pos-relative">person_add</i>add user</h5>
+                    <form>
+                      <div class="input-field col s12"><input type="text" id="name" class="validate"><label for="name">name :</label></div>
+                      <div class="input-field col s12"><input type="text" id="Username" class="validate"><label for="username">Username :</label></div>
+                      <div class="input-field col s12"><input type="email" id="email" class="validate"><label for="email">Email :</label></div>
+                      <button type="button" class="waves-effect waves-light btn blue darken-3 rounded_pill w-full max-w-250 m-b-20 m-t-20">submit</button>
+                    </form>
+                  </div>
+                </div>
+            <!-- add     user     end -->
       <!-- content   selction ------end----------->
     <script src="/assets/materialize/js/materialize.min.js"></script>
     <script src="/assets/js/main.js"></script>
