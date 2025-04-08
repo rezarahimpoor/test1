@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
-<body>
+<body x-data="usersData">
   
     <!-- nav bar section --------------start---------------->
     <nav class="white z-depth-0">
@@ -68,7 +68,7 @@
         <!-- end     serch     section--------->
        </section>
        <!-- --------start   center     section------->
-        <section class="user-list-section">
+        <section class="user-list-section " x-init="getUsers()">
           <ul class="collapsible hide-on-med-and-up">
             <li>
               <div class="collapsible-header"><i class="material-icons">arrow_drop_down</i>reza rahimpoor</div>
@@ -99,20 +99,15 @@
               </tr>
             </thead>
             <tbody>
+              <template x-for="user in users">
               <tr>
-                <td>1</td>
-                <td>reza</td>
-                <td>rezarahimpoor</td>
+                <td x-text="user.id"></td>
+                <td x-text="user.name"></td>
+                <td x-text="user.address.city"></td>
                 <td>reza137872@gmail.com</td>
                 <td><i class="material-icons">create</i><i class="material-icons">delete_forever</i></td>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Alan</td>
-                <td>Jellybean</td>
-                <td>gggijgfdfghjk</td>
-                <td><i class="material-icons">create</i><i class="material-icons">delete_forever</i></td>
-              </tr>
+              </template>
             </tbody>
           </table>
          </div>
@@ -149,6 +144,10 @@
                 </div>
             <!-- add     user     end -->
       <!-- content   selction ------end----------->
+    <script defer src="/assets/js/alpine.js"></script>
+      <script src="/assets/js/alpinecontroler/Usercontroller.js"></script>
+    <script src="/assets/js/axios/axios.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="/assets/materialize/js/materialize.min.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/user.js"></script>
