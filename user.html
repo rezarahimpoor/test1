@@ -50,15 +50,15 @@
        <section class="row" id="top-actions-section">
         <!-----------add btn---------------->
         <div class="p-l-10 p-r-10 p-t-10 col s12 m3 l2">
-            <button id="add_user_button" class="waves-effect waves-light btn blue darken-3 p-l-30 p-r-30 w-full rounded-pill flex-c-m">
+            <button id="add_user_button" class="waves-effect waves-light btn blue darken-3 p-l-30 p-r-30 w-full rounded-pill flex-c-m" x-on:click="showAddModal=true">
              <i class="material-icons m-r-5">add</i>Add User
             </button>    
         </div>    
         <!--------end   btn----------------->
         <!--------start   serch    section------->
         <div class="row col s12 m9 l8">
-            <div class="input-field col s12">
-              <input id="search" type="text" class="validate">
+            <div class="input-field col s12" x-init="$watch('searchChar', (value)=>handleSearch(value))">
+              <input id="search" type="text" class="validate" x-model="searchChar">
               <label for="search">
               <i class="material-icons pos-relative top-7">search</i>
               search</label>
@@ -67,24 +67,32 @@
         <div class="col l2 hide-on-med-and-down"></div>
         <!-- end     serch     section--------->
        </section>
-       <!-- --------start   center     section------->
+       <!-- --------start   center     section mobile------->
+       <template x-if="isloding">
+       <div class="center-align">
+        <div class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-green-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
         <section class="user-list-section " x-init="getUsers()">
           <ul class="collapsible hide-on-med-and-up">
+            <template x-for="user in pageUsers">
             <li>
-              <div class="collapsible-header"><i class="material-icons">arrow_drop_down</i>reza rahimpoor</div>
-              <div class="collapsible-body red"><span>Username: rezarahimpoor </span></div>
-              <div class="collapsible-body blue"><span>pass : Le476298 </span></div>
-              <div class="collapsible-body red"><span>email : reza137872@gmail.com </span></div>
+              <div class="collapsible-header"><i class="material-icons">arrow_drop_down</i><samp x-text="user.name"></samp></div>
+              <div class="collapsible-body red"><span x-text="user.username"></span></div>
+              <div class="collapsible-body blue"><span x-text="user.email"></span></div>
+              <div class="collapsible-body red"><span x-text="user.address"></span></div>
               <div class="collapsible-body blue"><span> <i class="material-icons">create</i><i class="material-icons">delete_forever</i> </span></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="material-icons">arrow_drop_down</i>Second</div>
-              <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="material-icons">arrow_drop_down</i>Third</div>
-              <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
+            </li></template>
           </ul>
         <!-- for   cp   size    start-->
          <div class="hide-on-med-and-down show-on-medium-and-up container">
@@ -99,7 +107,7 @@
               </tr>
             </thead>
             <tbody>
-              <template x-for="user in users">
+              <template x-for="user in pageUsers">
               <tr>
                 <td x-text="user.id"></td>
                 <td x-text="user.name"></td>
@@ -119,19 +127,21 @@
                   <div class="pagination_item_counts flex-l p-l-10 flex-l-m">
                     showing
                     <span class="m-r-5 m-l-5 max-w-50">
-                      <input type="number" value="10" class="blue-text darken-3 no-bored m-b-0 center-align"></span>
+                      <input type="number" value="10" class="blue-text darken-3 no-bored m-b-0 center-align" min="1" x-model="itemsCount" x-on:change="pagination()"></span>
                       of
-                      <span class="blue-text darken-3 m-l-5 m-r-5">100</span>
+                      <span class="blue-text darken-3 m-l-5 m-r-5" x-text="users.length">100</span>
                     </div>
+                    <strong class="blue-text darken-3" x-text="currentPage"></strong>
                     <div class="pgination_buttons">
-                      <i class="material-icons blue darken-3 waves-effect waves-light white-text rounded-pill m-l-5 m-r-5 p-b-3 p-t-1 p-r-5 p-l-5">keyboard_arrow_right</i>
-                      <i class="material-icons blue darken-3 waves-effect waves-light white-text rounded-pill m-l-5 m-r-5 p-b-3 p-t-1 p-r-5 p-l-5">keyboard_arrow_left</i>
+                      <i class="material-icons blue darken-3 waves-effect waves-light white-text rounded-pill m-l-5 m-r-5 p-b-3 p-t-1 p-r-5 p-l-5" x-on:click="nextPage">keyboard_arrow_right</i>
+                      <i class="material-icons blue darken-3 waves-effect waves-light white-text rounded-pill m-l-5 m-r-5 p-b-3 p-t-1 p-r-5 p-l-5" x-on:click="prevPage">keyboard_arrow_left</i>
                     </div>
                   </div>
       <!--          end        douwn    section  -->
             <!-- add    user     start -->
-                <div class="add_user_modal_back dis-none"></div>
-                <div class="add_user_modal container rounded_top_30 trans-0-4">
+            
+                <div class="add_user_modal_back" x-bind:class="{'dis-none' : !showAddModal}" x-on:click="showAddModal=false"></div>
+                <div class="add_user_modal container rounded_top_30 trans-0-4 "  x-bind:class="{'show' : showAddModal}">
                   <div class="row center-on-small-only p-b-10 p-t-10 p-l-40 p-r-40">
                     <h5><i class="material-icons m-r-10 m-l-10 top-4 pos-relative">person_add</i>add user</h5>
                     <form>

@@ -33,3 +33,7 @@ bottom: -70vh; }
 .add_user_modal.show{
 box-shadow: 0 0 10px blue;
 bottom: 0vh; }
+.user-list-section{
+  height: calc(100vh-256px);
+  overflow: auto;
+}
